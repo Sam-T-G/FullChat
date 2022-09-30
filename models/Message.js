@@ -6,7 +6,8 @@ class Message extends Model {}
 
 Message.init(
   {
-    content: {},
+    id: {},
+    message: {},
   },
   {
     sequelize,
