@@ -1,11 +1,11 @@
 /************This will get all messages from the database. ************/
-app.get(/*'/messages'*/, (req, res) => {
+app.get('/message', (req, res) => {
     Message.find({},(err, messages)=> {
       res.send(messages);
     })
   })
 /************Posts new messages created by the user, to the database.************/
-app.post(/*'/messages'*/, (req, res) => {
+app.post('/message', (req, res) => {
   var message = new Message(req.body);
   message.save((err) =>{
     if(err)
