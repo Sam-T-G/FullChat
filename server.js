@@ -21,7 +21,6 @@ const io = new Server(server);
 io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {
     console.log("message: " + msg);
-    io.emit("chat message", msg);
   });
 });
 
@@ -44,6 +43,11 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(function (req, res, next) {
+  req.io = io;
+  next();
+});
 
 app.use(routes);
 

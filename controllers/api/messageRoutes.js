@@ -1,19 +1,18 @@
 const router = require("express").Router();
+const { Message } = require("../../models");
 
 /************This will get all messages from the database. ************/
-router.get('/message', (req, res) => {
-    Message.find({},(err, messages)=> {
-      res.send(messages);
-    })
-  })
+router.get("/", (req, res) => {
+  Message.find({}, (err, messages) => {
+    res.send(messages);
+  });
+});
 /************Posts new messages created by the user, to the database.************/
-router.post('/message', (req, res) => {
-  var message = new Message(req.body);
-  message.save((err) =>{
-    if(err)
-      sendStatus(500);
-    res.sendStatus(200);
-  })
-})
+router.post("/", (req, res) => {
+  Message.create(req.body).then((data) => {
+    req.io.emit("chat message", req.body.message);
+    res.json(data);
+  });
+});
 
 module.exports = router;
