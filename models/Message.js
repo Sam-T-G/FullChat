@@ -4,6 +4,7 @@ const sequelize = require("../config/connection.js");
 
 class Message extends Model {}
 
+// Establishing message model; message elements shown when users chat within the chatroom
 Message.init(
   {
     id: {

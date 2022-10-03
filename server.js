@@ -1,3 +1,4 @@
+// Require all necessary packages
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
@@ -18,6 +19,7 @@ const hbs = exphbs.create({});
 const server = http.createServer(app);
 const io = new Server(server);
 
+// Establish socket.io connection and emit chat message
 io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {
     console.log("message: " + msg);

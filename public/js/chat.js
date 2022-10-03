@@ -2,7 +2,10 @@ var socket = io();
 var messages = document.getElementById("messages");
 var form = document.getElementById("form");
 var input = document.getElementById("input");
+
+// Event listener to submit responses
 form.addEventListener("submit", function (e) {
+  //Prevent listener is IMPERATIVE to prevent the default of refreshing the page > will cause us to lose message history and cause uneccessary page reload
   e.preventDefault();
   if (input.value) {
     fetch("/api/messages", {
