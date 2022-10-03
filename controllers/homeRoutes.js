@@ -22,6 +22,7 @@ router.get("/", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 // login
 router.get("/chat", (req, res) => {
   res.render("chatApp");
