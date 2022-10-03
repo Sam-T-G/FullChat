@@ -1,5 +1,9 @@
 
 {{!-- Homepage--}}
-{{#each users as |user| }}
+{{#each chats as |chat| }}
 <div> {{chat.chat_name}} </div>
+{{/each}}
+
+{{#each users as |user| }}
+<div> {{> user-details}} </div>
 {{/each}}

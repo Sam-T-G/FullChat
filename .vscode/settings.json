@@ -1,4 +1,7 @@
 {
-  "vscode-pets.petType": "rocky",
-  "vscode-pets.petColor": "gray"
+  "vscode-pets.petType": "dog",
+  "vscode-pets.petColor": "gray",
+  "vscode-pets.theme": "castle",
+  "vscode-pets.position": "explorer",
+  "vscode-pets.petSize": "medium"
 }
