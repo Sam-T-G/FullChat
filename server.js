@@ -1,24 +1,29 @@
+const path = require("path");
 const express = require("express");
-const routes = require("./routes");
-// import sequelize connection
+const session = require("express-session");
+const exphbs = require("express-handlebars");
+const routes = require("./controllers");
+const http = require("http");
+const { Server } = require("socket.io");
+
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
-io.on("connection", () => {
-  /* … */
+// Set up Handlebars.js engine with custom helpers
+const hbs = exphbs.create({});
+
+const server = http.createServer(app);
+const io = new Server(server);
+
+io.on("connection", (socket) => {
+  socket.on("chat message", (msg) => {
+    console.log("message: " + msg);
+    io.emit("chat message", msg);
+  });
 });
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use(session(sess));
-
-const hbs = exphbs.create({ helpers });
 
 const sess = {
   secret: process.env.SECRET,
@@ -30,12 +35,18 @@ const sess = {
   }),
 };
 
+app.use(session(sess));
+
+// Inform Express.js on which template engine to use
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(routes);
 
-// sync sequelize models to the database, then turn on the server
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
+sequelize.sync({ force: false }).then(() => {
+  server.listen(PORT, () => console.log("Now listening"));
 });

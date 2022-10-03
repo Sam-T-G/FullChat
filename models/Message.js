@@ -24,14 +24,15 @@ Message.init(
       },
     },
     chat_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'chat',
-          key: 'id',
-        },
+      type: DataTypes.INTEGER,
+      references: {
+        model: "chat",
+        key: "id",
+      },
     },
     date: {
-        default: NOW,
+      type: DataTypes.STRING,
+      default: Date.now(),
     },
   },
   {
