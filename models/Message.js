@@ -38,7 +38,7 @@ Message.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "messages",
+    modelName: "message",
   }
 );
 
