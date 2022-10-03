@@ -1,11 +1,13 @@
+const router = require("express").Router();
+
 /************This will get all messages from the database. ************/
-app.get('/message', (req, res) => {
+router.get('/message', (req, res) => {
     Message.find({},(err, messages)=> {
       res.send(messages);
     })
   })
 /************Posts new messages created by the user, to the database.************/
-app.post('/message', (req, res) => {
+router.post('/message', (req, res) => {
   var message = new Message(req.body);
   message.save((err) =>{
     if(err)
@@ -14,3 +16,4 @@ app.post('/message', (req, res) => {
   })
 })
 
+module.exports = router;
