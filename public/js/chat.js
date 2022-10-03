@@ -8,6 +8,7 @@ form.addEventListener("submit", function (e) {
   //Prevent listener is IMPERATIVE to prevent the default of refreshing the page > will cause us to lose message history and cause uneccessary page reload
   e.preventDefault();
   if (input.value) {
+    // "emit function sends information from the client to the server "
     socket.emit("chat message", input.value);
     input.value = "";
   }
