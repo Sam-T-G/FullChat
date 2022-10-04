@@ -24,12 +24,8 @@ router.get("/", withAuth, async (req, res) => {
 });
 
 // Chat
-router.get("/chat", (req, res) => {
-  if (req.session.logged_in) {
-    res.render("chatApp");
-  } else {
-    res.redirect("/login");
-  }
+router.get("/chat", withAuth, (req, res) => {
+  res.render("chatApp");
 });
 
 // login
