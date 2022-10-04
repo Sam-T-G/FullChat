@@ -23,17 +23,17 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
-// login
-router.get("/chat", (req, res) => {
+// Chat
+router.get("/chat", withAuth, (req, res) => {
   res.render("chatApp");
 });
 
+// login
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/");
     return;
   }
-
   res.render("login");
 });
 
