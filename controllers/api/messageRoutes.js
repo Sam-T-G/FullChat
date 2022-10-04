@@ -1,16 +1,18 @@
 const router = require("express").Router();
-const { Message } = require("../../models");
+const { Message, User } = require("../../models");
 
 /************This will get all messages from the database. ************/
 router.get("/", (req, res) => {
-  Message.find({}, (err, messages) => {
-    res.send(messages);
-  });
+  Message.findAll({include: [User]}).then(data => {
+    res.json(data)
+  })
 });
 /************Posts new messages created by the user, to the database.************/
-router.post("/", (req, res) => {
-  Message.create(req.body).then((data) => {
-    req.io.emit("chat message", req.body.message);
+router.post("/", async (req, res) => {
+  const userData = await User.findByPk(req.session.user_id)
+  const user = userData.get({plain: true})
+  Message.create({message: req.body.message, user_id: req.session.user_id}).then((data) => {
+    req.io.emit("chat message", `${user.username}: ${req.body.message}`);
     res.json(data);
   });
 });

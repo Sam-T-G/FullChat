@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../models");
 const withAuth = require("../utils/auth");
-const { routes } = require("./api");
 
 // Get user
 
@@ -16,7 +15,7 @@ router.get("/", withAuth, async (req, res) => {
 
     res.render("homepage", {
       users,
-      logged_in: req.session.logged_in,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -25,13 +24,15 @@ router.get("/", withAuth, async (req, res) => {
 
 // Chat
 router.get("/chat", withAuth, (req, res) => {
-  res.render("chatApp");
+  res.render("chatApp", {
+    loggedIn: req.session.loggedIn,
+  });
 });
 
 // login
 router.get("/login", (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect("/");
+  if (req.session.loggedIn) {
+    res.redirect("/chat");
     return;
   }
   res.render("login");

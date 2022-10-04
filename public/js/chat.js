@@ -25,6 +25,20 @@ socket.on("chat message", function (msg) {
   console.log(msg);
   var item = document.createElement("li");
   item.textContent = msg;
+  item.setAttribute('class', 'message')
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
+});
+
+fetch("/api/messages", {
+  method: "GET",
+}).then(response => {
+  return response.json();
+}).then((data) => {
+  data.forEach(obj => {
+  var item = document.createElement("li");
+  item.innerHTML = `<strong>${obj.user.username}</strong>: ${obj.message}`;
+  messages.appendChild(item);
+  })
+  console.log(data);
 });

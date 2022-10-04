@@ -14,7 +14,7 @@ const loginFormHandler = async (event) => {
 
     // if login info matches with one stored in database then continue
     if (response.ok) {
-      document.location.replace("/");
+      document.location.replace("/chat");
       // if not, let user know that login has failed
     } else {
       alert("Failed to log in");
@@ -37,7 +37,7 @@ const signupFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace('/chat');
     } else {
       alert('Failed to sign up.');
     }
