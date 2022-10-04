@@ -1,4 +1,4 @@
-
+{{#if loggedIn}}
 <ul id="messages"></ul>
 <form id="form" action="">
   <input id="input" autocomplete="off" /><button>Send</button>
@@ -7,3 +7,7 @@
 {{! Link socket.io script and chat.js script }}
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/chat.js"></script>
+
+{{else}}
+<a href="/login">You must login first to view this page</a>
+{{/if}}
