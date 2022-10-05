@@ -19,7 +19,7 @@
 
 ## Description
 
-We used - [Socket](#Socket) to replicate what react.js can do for us. We used express and node to get the server up and running. We also used MySql to serve as our database. We also used handlebars
+We used - [Socket](#Socket) to replicate what react.js can do for us. We used express and node to get the server up and running. We also used MySql to serve as our database. We also used handlebars to serve as our html. We used front end Java and CSS to help with the display. We used routes to serve the user's desires that our server has to offer.
 
 ## Motivation
 
